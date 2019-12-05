@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import TimerDone from '../sounds/service-bell_daniel_simion.wav'
 import Meditation from '../sounds/Mindfulness Bell - A 5 Minute Mindfulness Meditation.wav'
+import Play from '../icons/noun_Play in circle_2433769.svg'
+import Pause from '../icons/noun_pause in circle_2433738.svg'
+import Refresh from '../icons/noun_Refresh_2433739.svg'
 
 let meditation = new Audio(Meditation)
 
@@ -30,7 +33,8 @@ class Timer extends Component
         }
         this.setState(
         { 
-            intervalId: intervalId
+            intervalId: intervalId,
+            running: true
         })
     }
 
@@ -63,8 +67,13 @@ class Timer extends Component
 
     stopTimer = () => 
     {
+        console.log("Stop hitting")
         meditation.pause()
         clearInterval(this.state.intervalId)
+        this.setState(
+        {
+            running: false
+        })
     }
 
     resetTimer = () =>
@@ -77,7 +86,8 @@ class Timer extends Component
             this.setState(
             {
                 minutes: 0,
-                seconds: 25
+                seconds: 25,
+                running: false
             })
         }
         else if(this.state.break)
@@ -85,7 +95,8 @@ class Timer extends Component
             this.setState(
             {
                 minutes: 0,
-                seconds: 5
+                seconds: 5,
+                running: false
             })
         }
     }
@@ -111,14 +122,14 @@ class Timer extends Component
     {
         return(
 
-            <div className="h-full w-1/6 flex flex-col justify-around items-center">
-                <div className="flex flex-col justify-center items-center"><span>Welcome to</span><span style={{'font-family': 'Courgette', 'font-size': '40px'}}>DeepWork</span><span>{ this.props.name }</span></div>
-                <div classname="flex flex-col justify-center items-center">
-                    <div className="text-2xl mb-2 text-center w-full" style={{'font-family': 'Courgette', 'font-size': '40px'}}>{ `${this.state.minutes} : ${this.state.seconds < 10 ? '0' + this.state.seconds : this.state.seconds}` }</div>
+            <div className="h-full w-1/4 flex flex-col justify-around items-center px-4">
+                <div className="flex flex-col justify-center items-center w-full"><span>Welcome to</span><span style={{'font-family': 'Courgette', 'font-size': '40px'}}>DeepWork</span><span>{ this.props.name }</span></div>
+                <div classname="flex flex-col justify-center items-center w-full" style={{'width': '150px'}}>
+                    <div className="text-2xl mb-2 text-center flex flex-row justify-around w-full pl-px" style={{'font-family': 'Courgette', 'font-size': '40px'}}><span className="w-5/12">{this.state.minutes  < 10 ? '0' + this.state.minutes : this.state.minutes}</span><span className="w-1/6">:</span><span className="w-5/12">{this.state.seconds < 10 ? '0' + this.state.seconds : this.state.seconds}</span></div>
                     <div className="flex flex-row text-xs mb-4 justify-around w-full"><span className="mx-2" onClick={ this.setWork } style={this.state.work ? {'font-weight': 'bold', 'scale': '1.1', 'color': 'rgba(0, 0, 0, 1)'} : {'color': 'rgba(0, 0, 0, 0.2)'}}>Work</span><span className="mx-2" onClick={ this.setBreak } style={this.state.break ? {'font-weight': 'bold', 'scale': '1.1', 'color': 'rgba(0, 0, 0, 1)'} : {'color': 'rgba(0, 0, 0, 0.2)'}}>Break</span></div>
-                    <div className="flex flex-col w-full items-center justify-around"><button onClick={ this.startTimer }>Start</button><button onClick={ this.stopTimer }>Stop</button><button onClick={ this.resetTimer }>Reset</button></div>
+                    <div className="flex flex-col w-full items-center justify-around">{ this.state.running ? <img height="50px" width="50px" src={ Pause } onClick={ this.stopTimer }></img> : <img height="50px" width="50px" src={ Play } onClick={ this.startTimer }></img> }<img height="50px" width="50px" src={ Refresh } onClick={ this.resetTimer }></img></div>
                 </div>
-                <div><button>Logout</button></div>
+                <div className="w-full flex justify-center"><button style={{'background-color': '#EF7A85'}} className="py-2 px-4 rounded font-bold text-white" onClick={ this.props.logout }>Logout</button></div>
             </div>
 
         )

@@ -9,41 +9,78 @@ class App extends Component
 
   state = 
   {
-    loggedIn: false,
+    isLoggedIn: false,
     user: null,
     index: -1
+  }
+
+  autoLogin = () =>
+  {
+    const token = localStorage.getItem("token")
+    console.log(token)
+    if(token)
+    {
+      fetch('http://localhost:3000/users/auto_login', 
+      {
+        method: "GET",
+        headers: 
+        {
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      .then(res => res.json())
+      .then((user) => 
+      {
+        console.log(user)
+        this.setState(
+        {
+          user: user
+        }, 
+        () => 
+        {
+          this.setState(
+          {
+            isLoggedIn: true
+          })
+        })
+      })
+    }
+  }
+
+  componentDidMount()
+  {
+    this.autoLogin()
   }
 
   getReturningUser = (username, password) =>
   {
 
-    fetch('http://localhost:3000/users')
-    .then(res => res.json())
-    .then((users) => 
+    fetch('http://localhost:3000/users/login',
     {
-
-      let currentUser = users.find((user) => 
+      method: "POST",
+      headers:
       {
-        return ((user.username === username) && (user.password === password))
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify(
+      {
+        username: username,
+        password: password
       })
-
-      if(currentUser)
+    })
+    .then(res => res.json())
+    .then((payload) => 
+    {
+      console.log(payload.user)
+      if(!payload.error)
       {
-
-        fetch(`http://localhost:3000/users/${currentUser.id}`)
-        .then(res => res.json())
-        .then((user) => 
+        localStorage.setItem("token", payload.token)
+        this.setState(
         {
-          if(user)
-          {
-            this.setState(
-            {
-              user: user,
-              loggedIn: true
-            })
-          }
+          user: payload.user,
+          isLoggedIn: true
         })
-
       }
 
     })
@@ -68,14 +105,21 @@ class App extends Component
       })
     })
     .then(res => res.json())
-    .then((user) => 
+    .then((payload) => 
     {
-      if(user)
+      if(payload.user)
       {
+        localStorage.token = payload.token
         this.setState(
         {
-          user: user,
-          loggedIn: true
+          user: payload.user
+        },
+        () => 
+        {
+          this.setState(
+          {
+            isLoggedIn: true
+          })
         })
       }
     })
@@ -95,16 +139,28 @@ class App extends Component
     return this.state.index
   }
 
+  logout = () =>
+  {
+    localStorage.clear()
+    this.setState(
+    {
+      isLoggedIn: false,
+      user: null,
+      index: -1
+    })
+  }
+
   render()
   {
+    console.log(this.state.user)
     return(
 
-      <div className="App w-full h-full flex flex-row justify-center items-center">
+      <div className="App w-full h-full flex flex-row justify-center items-center bg-gray-100">
       {
-        this.state.loggedIn
+        this.state.isLoggedIn
         ?
         <>
-          <Timer iterate={ () => this.iterate() } name={ this.state.user.username } />
+          <Timer iterate={ () => this.iterate() } name={ this.state.user.username } logout={ this.logout } />
           <TaskContainer user={ this.state.user } index={ this.index() } />
         </>
         :

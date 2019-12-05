@@ -12,19 +12,29 @@ class TaskContainer extends Component
 
     addTask = (task) => 
     {
-        // console.log("Function hitting")
+        console.log(this.state.tasks)
         console.log(task)
-        this.setState(
+        if(this.state.tasks)
         {
-            tasks: [...this.state.tasks, task]
-        })
+            this.setState(
+            {
+                tasks: [...this.state.tasks, task]
+            })
+        }
+        else
+        {
+            this.setState(
+            {
+                tasks: [task]
+            })
+        }
     }
 
     render()
     {
         return(
 
-            <div className="flex flex-row h-full w-5/6 justify-center items-center">
+            <div className="flex flex-row h-full w-3/4 justify-center items-center">
                 <EisenhowerMatrix tasks={ this.state.tasks } index={ this.props.index } />
                 <NewTaskForm addTask={ this.addTask } user={ this.props.user } />
             </div>

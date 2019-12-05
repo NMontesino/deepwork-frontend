@@ -10,12 +10,12 @@ class EisenhowerMatrix extends Component
 
             <div className="flex flex-col w-3/4 h-full">
                 <div className="flex flex-row" style={{'height': 'calc((100% - 48px) / 2)', 'width': '100%', 'margin': '16px 0'}}>
-                    <EisenhowerSquare index={ this.props.index } tasks={ this.props.tasks ? this.props.tasks.filter((task) => {return (task.important && task.urgent)}) : null } name="Urgent | Important" colors={{bg: '#e34250', text: '#a2f3eb'}}/>
-                    <EisenhowerSquare tasks={ this.props.tasks ? this.props.tasks.filter((task) => {return (task.important && !task.urgent)}) : null } name="Not Urgent | Important" colors={{bg: '#7325f9', text: '#ccfeb7'}}/>
+                    <EisenhowerSquare index={ this.props.index } tasks={ this.props.tasks ? this.props.tasks.filter((task) => {return (task.important && task.urgent)}) : null } name="Do It" colors={{bg: '#b5f2dd', text: '#8a36ff'}}/>
+                    <EisenhowerSquare tasks={ this.props.tasks ? this.props.tasks.filter((task) => {return (task.important && !task.urgent)}) : null } name="Defer It" colors={{bg: '#FBDAB3', text: '#d64737'}}/>
                 </div>
                 <div className="flex flex-row" style={{'height': 'calc((100% - 48px) / 2)', 'width': '100%', 'margin-bottom': '16px'}}>
-                    <EisenhowerSquare tasks={ this.props.tasks ? this.props.tasks.filter((task) => {return (!task.important && task.urgent)}) : null } name="Urgent | Not Important" colors={{bg: '#fbe8a7', text: '#730950'}}/>
-                    <EisenhowerSquare tasks={ this.props.tasks ? this.props.tasks.filter((task) => {return (!task.important && !task.urgent)}) : null } name="Not Urgent | Not Important" colors={{bg: '#51fcda', text: '#5e1e5a'}}/>
+                    <EisenhowerSquare tasks={ this.props.tasks ? this.props.tasks.filter((task) => {return (!task.important && task.urgent)}) : null } name="Delegate It" colors={{bg: '#642115', text: '#97E6FA'}}/>
+                    <EisenhowerSquare tasks={ this.props.tasks ? this.props.tasks.filter((task) => {return (!task.important && !task.urgent)}) : null } name="Delete It" colors={{bg: '#782BE4', text: '#f6c699'}}/>
                 </div>
             </div>
 
