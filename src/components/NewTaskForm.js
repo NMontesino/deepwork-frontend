@@ -15,7 +15,7 @@ class NewTaskForm extends Component
 
         e.preventDefault()
 
-        fetch('http://localhost:3000/tasks', 
+        fetch('https://deepwork-backend.herokuapp.com/tasks', 
         {
             method: "POST",
             headers:
