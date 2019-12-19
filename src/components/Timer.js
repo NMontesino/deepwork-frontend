@@ -85,8 +85,8 @@ class Timer extends Component
             this.props.iterate()
             this.setState(
             {
-                minutes: 0,
-                seconds: 25,
+                minutes: 25,
+                seconds: 0,
                 running: false
             })
         }
@@ -94,8 +94,8 @@ class Timer extends Component
         {
             this.setState(
             {
-                minutes: 0,
-                seconds: 5,
+                minutes: 5,
+                seconds: 0,
                 running: false
             })
         }
