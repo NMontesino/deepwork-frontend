@@ -20,7 +20,7 @@ class App extends Component
     console.log(token)
     if(token)
     {
-      fetch('http://localhost:3000/users/auto_login', 
+      fetch('http://localhost:3000/api/v1/users/auto_login', 
       {
         method: "GET",
         headers: 
@@ -55,7 +55,7 @@ class App extends Component
   getReturningUser = (username, password) =>
   {
 
-    fetch('http://localhost:3000/users/login',
+    fetch('http://localhost:3000/api/v1/users/login',
     {
       method: "POST",
       headers:
@@ -90,7 +90,7 @@ class App extends Component
   getNewUser = (username, password) =>
   {
 
-    fetch('http://localhost:3000/users', 
+    fetch('http://localhost:3000/api/v1/users', 
     {
       method: "POST",
       headers: 

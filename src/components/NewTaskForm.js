@@ -15,7 +15,7 @@ class NewTaskForm extends Component
 
         e.preventDefault()
 
-        fetch('http://localhost:3000/tasks', 
+        fetch('http://localhost:3000/api/v1/tasks', 
         {
             method: "POST",
             headers:
