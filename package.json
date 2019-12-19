@@ -2,7 +2,6 @@
   "name": "deepwork-frontend",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://deepworkapp.herokuapp.com",
   "dependencies": {
     "postcss-import": "^12.0.1",
     "react": "^16.12.0",
