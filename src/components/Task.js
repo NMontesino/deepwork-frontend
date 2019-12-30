@@ -11,9 +11,9 @@ class Task extends Component
 
             <div className="px-4 py-2 rounded-full flex flex-row align-center justify-between" style={ this.props.active ? {'background-color': this.props.bgHighlight, 'color': this.props.textHighlight, 'font-family': 'Montserrat', 'font-weight': '600'} : {'background-color': this.props.textHighlight, 'color': this.props.bgHighlight, 'font-family': 'Montserrat', 'font-weight': '600'} }>
                 <div>{ this.props.task.name }</div>
-                <div>
-                    <img height="20px" width="20px" src={ Edit }></img>
-                    <img height="20px" width="20px" src={ Delete }></img>
+                <div className="flex flex-row justify-between" style={{'width': '25px'}}>
+                    <img height="15px" width="15px" src={ Edit }></img>
+                    <img height="15px" width="15px" src={ Delete }></img>
                 </div>
             </div>
     
