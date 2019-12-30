@@ -10,6 +10,18 @@ class TaskContainer extends Component
         tasks: this.props.user.tasks
     }
 
+    removeTask = (task) =>
+    {
+        let newTaskList = this.state.tasks.filter((stateTask) => 
+        {
+            stateTask != task
+        })
+        this.setState(
+        {
+            tasks: [...newTaskList]
+        })
+    }
+
     addTask = (task) => 
     {
         console.log(this.state.tasks)
@@ -35,12 +47,13 @@ class TaskContainer extends Component
         return(
 
             <div className="flex flex-row h-full w-3/4 justify-center items-center">
-                <EisenhowerMatrix tasks={ this.state.tasks } index={ this.props.index } />
+                <EisenhowerMatrix removeTask={ this.removeTask } tasks={ this.state.tasks } index={ this.props.index } />
                 <NewTaskForm addTask={ this.addTask } user={ this.props.user } />
             </div>
 
         )
     }
+
 }
 
 export default TaskContainer

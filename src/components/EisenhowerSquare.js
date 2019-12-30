@@ -12,7 +12,7 @@ class EisenhowerSquare extends Component
     render()
     {
 
-        let tasks = this.props.tasks ? this.props.tasks.map((task, index) => {return <Task task={ task } bgHighlight={ this.props.colors.text } textHighlight={ this.props.colors.bg } active={ index === this.adjustIndex() } />}) : null
+        let tasks = this.props.tasks ? this.props.tasks.map((task, index) => {return <Task task={ task } removeTask={ this.props.removeTask } bgHighlight={ this.props.colors.text } textHighlight={ this.props.colors.bg } active={ index === this.adjustIndex() } />}) : null
 
         return(
 

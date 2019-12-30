@@ -5,6 +5,27 @@ import Delete from '../icons/noun_bin_2956146.svg'
 class Task extends Component
 {
 
+    handleDelete = (e) =>
+    {
+
+        e.preventDefault()
+
+        fetch(`https://deepwork-backend.herokuapp.com/tasks/${this.props.task.id}`, 
+        {
+            method: "DELETE",
+            headers:
+            {
+                'Authorization': `Bearer ${localStorage.token}`
+            }
+        })
+        .then(res => res.json())
+        .then((task) => 
+        {
+            this.props.removeTask(task)
+        })
+
+    }
+
     render()
     {
         return(
