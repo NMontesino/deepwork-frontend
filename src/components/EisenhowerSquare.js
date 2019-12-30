@@ -16,7 +16,7 @@ class EisenhowerSquare extends Component
 
         return(
 
-            <div className="rounded-lg shadow" style={{'height': '100%', 'width': 'calc((100% - 48px)/2)', 'margin-left': '16px', 'background-color': this.props.colors.bg, 'color': this.props.colors.text}}>
+            <div className="rounded-lg shadow p-6" style={{'height': '100%', 'width': 'calc((100% - 48px)/2)', 'margin-left': '16px', 'background-color': this.props.colors.bg, 'color': this.props.colors.text}}>
                 <div className="w-full text-center text-2xl my-4" style={{'font-family': 'Montserrat', 'font-weight': '900'}}>{ this.props.name }</div>
                 <div className="w-full p-4" style={{'height': '70%','overflow': 'scroll'}}>
                     { tasks }
